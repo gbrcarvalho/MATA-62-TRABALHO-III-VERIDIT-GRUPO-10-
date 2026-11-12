@@ -25,6 +25,8 @@ export async function emailExists(email: string): Promise<boolean> {
     return accounts.some(account => account.email.toLowerCase() === email.toLowerCase())
 }
 
+export const ACCOUNTS_REPOSITORY = Symbol('ACCOUNTS_REPOSITORY')
+
 export interface AccountsRepository {
     findByEmail: (email: string) => Promise<Account | undefined>
     findByCpf: (cpf: string) => Promise<Account | undefined>
