@@ -6,6 +6,8 @@ import { AuthService } from './auth.service.js';
 import { AuthGuard } from './auth.guard.js';
 import { TOKEN_REPOSITORY } from './interfaces/token-repository.interface.js';
 import { InMemoryTokenRepository } from './inmemory-token.repository.js';
+import { JsonAccountsRepository } from './json-accounts.repository.js';
+import { ACCOUNTS_REPOSITORY } from './interfaces/accounts-repository.interface.js';
 
 @Module({
   imports: [],
@@ -14,7 +16,8 @@ import { InMemoryTokenRepository } from './inmemory-token.repository.js';
     AccountsService,
     AuthService,
     AuthGuard,
-    { provide: TOKEN_REPOSITORY, useClass: InMemoryTokenRepository }
+    { provide: TOKEN_REPOSITORY, useClass: InMemoryTokenRepository },
+    { provide: ACCOUNTS_REPOSITORY, useClass: JsonAccountsRepository }
   ],
 })
 export class AppModule {}

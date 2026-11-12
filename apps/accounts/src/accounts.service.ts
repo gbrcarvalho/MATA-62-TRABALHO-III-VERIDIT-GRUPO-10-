@@ -1,15 +1,17 @@
-import { BadRequestException, ConflictException, Injectable } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, Inject } from '@nestjs/common';
 import { CreateAccountDto } from './dtos/create-account.dto.js';
-import { JsonAccountsRepository } from './json-accounts.repository.js';
+import * as AccountsRepository from './interfaces/accounts-repository.interface.js';
 import { Account } from './models/account.model.js';
 import { randomUUID } from 'node:crypto';
 import { UserType } from './enums/user-type.enum.js';
 import { PasswordHasher } from './interfaces/password-hasher.interface.js';
 import { PassThrough } from 'node:stream';
 
+const ACCOUNTS_REPOSITORY = AccountsRepository.ACCOUNTS_REPOSITORY
+type AccountsRepository = AccountsRepository.AccountsRepository
+
 @Injectable()
 export class AccountsService {
-  private _repository = new JsonAccountsRepository()
   private _passwordHasher: PasswordHasher = {
     hash(password: string) {
       return password
@@ -20,6 +22,8 @@ export class AccountsService {
   }
 
   private _uuidGenerator = () => randomUUID()
+
+  constructor(@Inject(ACCOUNTS_REPOSITORY) private readonly _repository: AccountsRepository) {}
 
   async createAccount(createAccountDto: CreateAccountDto): Promise<Account> {
     const { name, email, password, cpf, oab, type } = createAccountDto
