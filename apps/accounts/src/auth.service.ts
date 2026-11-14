@@ -33,10 +33,10 @@ export class AuthService {
   async login(loginDto: LoginDto): Promise<AuthResponseDto> {
     const account = await this._accountsRepository.findByEmail(loginDto.email)
     if (!account) throw new UnauthorizedException('Email e/ou senha, inválidos!')
-    
+
     const correctPassword = this._passwordHasher.compare(loginDto.password, account.passwordHash)
     if (!correctPassword) throw new UnauthorizedException('Email e/ou senha, inválidos!')
-    
+
     const accessToken = this._jwtService.sign({ sub: account.id, email: account.email, type: account.type })
 
     return AuthResponseDto.create(accessToken, 'Bearer', this._jwtService.expiresInSeconds, AccountResponseDto.create(account))

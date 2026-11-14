@@ -19,7 +19,7 @@ export class AuthController {
     if (!dto) throw new BadRequestException('Dados inválidos!')
 
     const response = await this.authService.login(dto)
-    
+
     return response
   }
 
@@ -28,5 +28,11 @@ export class AuthController {
   @UseGuards(AuthGuard)
   logout(@Req() req: AuthenticatedRequest): void {
     this.authService.logout(req.user.jti)
+  }
+
+  @Post('auth/verify')
+  @UseGuards(AuthGuard)
+  verify(@Req() req: AuthenticatedRequest) {
+    return req.user
   }
 }
