@@ -39,6 +39,12 @@ async function authenticate(req: Request, res: Response, next: NextFunction) {
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bodyParser: false });
 
+  app.enableCors({
+      origin: "http://localhost:3000",
+      methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+      allowedHeaders: ["Content-Type", "Authorization"],
+  })
+
   app.use('/auth/verify', (_: Request, res: Response) => res.sendStatus(404));
 
   for (const r of routes) {

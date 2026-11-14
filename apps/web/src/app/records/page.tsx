@@ -15,8 +15,9 @@ export default function RecordsPage() {
   useEffect(() => {
     // Só busca se o usuário estiver logado
     if (!user) return;
-    
-    fetchRecords(user.id)
+
+    // agora não passa mais o userId
+    fetchRecords()
       .then(setRecords)
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
@@ -28,7 +29,7 @@ export default function RecordsPage() {
   return (
     <div className="min-h-screen bg-slate-50 p-8">
       <div className="max-w-4xl mx-auto space-y-8">
-        
+
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-bold text-slate-800">Meus Registros</h1>
           <Link href="/profile" className="text-blue-600 hover:underline">

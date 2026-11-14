@@ -2,17 +2,23 @@
 import type { Record } from '@/types/record';
 
 const RECORDS_API_URL = process.env.NEXT_PUBLIC_RECORDS_API_URL ?? 'http://localhost:3002';
+const TOKEN_KEY = 'token';
 
-export async function fetchRecords(userId: string): Promise<Record[]> {
+// era userId, mudei porque agora o frontend se comunica somente com o api gateway
+export async function fetchRecords(): Promise<Record[]> {
   const params = new URLSearchParams({
     page: '1',
     pageSize: '10'
   });
 
+  const token = localStorage.getItem(TOKEN_KEY) ?? '';
+
   const res = await fetch(`${RECORDS_API_URL}/records?${params.toString()}`, {
     method: 'GET',
     headers: {
-      'x-user-id': userId,
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    //   'x-user-id': userId,
     },
   });
 
@@ -23,7 +29,7 @@ export async function fetchRecords(userId: string): Promise<Record[]> {
   }
 
   const data = await res.json();
-  
+
   // 🚨 DEBUG: Isso vai imprimir no console do navegador (F12) o que o backend enviou
   console.log('Retorno do backend records:', data);
 
@@ -32,6 +38,6 @@ export async function fetchRecords(userId: string): Promise<Record[]> {
   if (Array.isArray(data.items)) return data.items;
   if (Array.isArray(data.data)) return data.data;
   if (Array.isArray(data.records)) return data.records;
-  
+
   return []; // Se não achar nada, retorna vazio para não quebrar a tela
 }
