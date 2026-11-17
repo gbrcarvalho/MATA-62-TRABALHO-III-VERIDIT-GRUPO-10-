@@ -9,32 +9,7 @@ import type { Account } from '../src/models/account.model.js'
 import { UserType } from '../src/enums/user-type.enum.js'
 import { AuthService } from '../src/auth.service.js'
 import { AuthGuard } from '../src/auth.guard.js'
-
-/**
- * Repositório em memória usado só nos testes, para não depender
- * (nem alterar) o ./database/seed.json.
- */
-class FakeAccountsRepository implements AccountsRepository {
-  db: Account[] = []
-
-  async findByEmail(email: string) {
-    return this.db.find(a => a.email.toLowerCase() === email.toLowerCase())
-  }
-
-  async findByCpf(cpf: string) {
-    const normalize = (v: string) => v.replace(/\D/g, '')
-    return this.db.find(a => normalize(a.cpf) === normalize(cpf))
-  }
-
-  async create(account: Account) {
-    this.db.push(account)
-    return account
-  }
-
-  reset() {
-    this.db = []
-  }
-}
+import { FakeAccountsRepository } from './mock/fake-accounts.repository.js'
 
 const validCommon = () => ({
   name: 'Maria Silva',
