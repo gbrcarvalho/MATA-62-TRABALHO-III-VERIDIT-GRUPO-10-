@@ -13,7 +13,6 @@ export default function RecordsPage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    // Só busca se o usuário estiver logado
     if (!user) return;
 
     // agora não passa mais o userId
@@ -54,7 +53,7 @@ export default function RecordsPage() {
         </div>
 
         <div className="bg-yellow-50 p-4 border border-yellow-200 rounded-md text-yellow-800 text-sm">
-          <strong>Aviso para o grupo:</strong> A criação de registros será habilitada assim que o backend de <code>records</code> implementar a rota <code>@Post()</code> no controller.
+          <strong>Aviso para o grupo:</strong> A criação de registros será habilitada assim que o backend de <code>capture</code> implementar o serviço.
         </div>
 
       </div>

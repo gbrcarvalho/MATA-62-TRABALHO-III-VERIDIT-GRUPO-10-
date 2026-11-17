@@ -18,7 +18,6 @@ export async function fetchRecords(): Promise<Record[]> {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
-    //   'x-user-id': userId,
     },
   });
 
@@ -30,14 +29,13 @@ export async function fetchRecords(): Promise<Record[]> {
 
   const data = await res.json();
 
-  // 🚨 DEBUG: Isso vai imprimir no console do navegador (F12) o que o backend enviou
+  // DEBUG
   console.log('Retorno do backend records:', data);
 
-  // Garante que o retorno seja SEMPRE um array
   if (Array.isArray(data)) return data;
   if (Array.isArray(data.items)) return data.items;
   if (Array.isArray(data.data)) return data.data;
   if (Array.isArray(data.records)) return data.records;
 
-  return []; // Se não achar nada, retorna vazio para não quebrar a tela
+  return [];
 }

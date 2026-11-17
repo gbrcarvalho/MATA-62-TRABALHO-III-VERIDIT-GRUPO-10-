@@ -12,7 +12,7 @@ export interface Account {
   cpf: string;
   oab: string | null;
   type: UserTypeRaw;
-  createAt: string; // ⚠️ typo vem assim do back
+  createAt: string; //typo vem assim do back
 }
 
 export interface LoginResponse {
