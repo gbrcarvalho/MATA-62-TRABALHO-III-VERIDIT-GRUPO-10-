@@ -6,7 +6,7 @@ import { JwtPayload } from './interfaces/jwt-payload.interface.js'
 @Injectable()
 export class JwtService {
   private readonly jwt = new NestJwt()
-  private readonly secret = process.env.JWT_SECRET
+  private readonly secret = process.env.JWT_SECRET ?? 'uma-senha-super-secreta-substituir-em-producao'
   readonly expiresInSeconds = Number(process.env.JWT_EXPIRATION ?? '1200')
 
   constructor() {
