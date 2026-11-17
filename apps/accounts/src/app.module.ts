@@ -8,7 +8,6 @@ import { TOKEN_REPOSITORY } from './interfaces/token-repository.interface.js';
 import { InMemoryTokenRepository } from './inmemory-token.repository.js';
 import { JsonAccountsRepository } from './json-accounts.repository.js';
 import { ACCOUNTS_REPOSITORY } from './interfaces/accounts-repository.interface.js';
-import { PasswordHasher } from './interfaces/password-hasher.interface.js';
 import { PASSWORD_HASHER } from './interfaces/password-hasher.interface.js';
 import { ConcretePasswordHasher } from './password-hasher.js';
 import { JwtService } from './jwt.service.js';

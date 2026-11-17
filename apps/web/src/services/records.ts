@@ -1,7 +1,7 @@
 // apps/web/src/services/records.ts
 import type { Record } from '@/types/record';
 
-const RECORDS_API_URL = process.env.NEXT_PUBLIC_RECORDS_API_URL ?? 'http://localhost:3002';
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3009';
 const TOKEN_KEY = 'token';
 
 // era userId, mudei porque agora o frontend se comunica somente com o api gateway
@@ -13,7 +13,7 @@ export async function fetchRecords(): Promise<Record[]> {
 
   const token = localStorage.getItem(TOKEN_KEY) ?? '';
 
-  const res = await fetch(`${RECORDS_API_URL}/records?${params.toString()}`, {
+  const res = await fetch(`${API_URL}/records?${params.toString()}`, {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${token}`,
