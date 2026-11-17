@@ -1,4 +1,3 @@
-// jwt.service.ts
 import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { JwtService as NestJwt } from '@nestjs/jwt'
 import { randomUUID } from 'crypto'
@@ -18,7 +17,7 @@ export class JwtService {
 
   sign(data: Pick<JwtPayload, 'sub' | 'email' | 'type'>): string {
     const payload = { email: data.email, type: data.type }
-    return this._jwt.sign(payload, { 
+    return this._jwt.sign(payload, {
         algorithm: 'HS256',
         subject: data.sub,
         jwtid: randomUUID(),
