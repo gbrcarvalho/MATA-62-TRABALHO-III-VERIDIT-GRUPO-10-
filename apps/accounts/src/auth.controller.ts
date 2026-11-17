@@ -8,11 +8,6 @@ import { AuthGuard, type AuthenticatedRequest } from './auth.guard.js';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Get()
-  get(): string {
-    return 'Auth'
-  }
-
   @Post('auth/login')
   async login(@Body() loginReq: LoginReq): Promise<AuthResponseDto> {
     const dto = LoginDto.create(loginReq)

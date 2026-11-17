@@ -5,17 +5,17 @@ import { Injectable, OnModuleInit } from '@nestjs/common'
 
 @Injectable()
 export class JsonAccountsRepository implements AccountsRepository, OnModuleInit {
-    private _inMemoryDb: Account[]
-    private _filePath: string
+    private inMemoryDb: Account[]
+    private filePath: string
 
     async onModuleInit(): Promise<void> {
-        this._filePath = './database/seed.json'
-        this._inMemoryDb = await this._readAccounts()
+        this.filePath = './database/seed.json'
+        this.inMemoryDb = await this.readAccounts()
     }
 
-    private async _readAccounts(): Promise<Account[]> {
+    private async readAccounts(): Promise<Account[]> {
         try {
-            const content = await readFile(this._filePath, 'utf-8')
+            const content = await readFile(this.filePath, 'utf-8')
             return JSON.parse(content)
         } catch (err: any) {
             if (err.code === 'ENOENT') return [] // arquivo ainda não existe
@@ -24,16 +24,16 @@ export class JsonAccountsRepository implements AccountsRepository, OnModuleInit 
     }
 
     async findByEmail(email: string): Promise<Account | undefined> {
-        return this._inMemoryDb.find(account => account.email.toLowerCase() === email.toLowerCase())
+        return this.inMemoryDb.find(account => account.email.toLowerCase() === email.toLowerCase())
     }
 
     async findByCpf(cpf: string): Promise<Account | undefined> {
         const normalize = (value: string) => value.replace(/\D/g, '')
-        return this._inMemoryDb.find(account => normalize(account.cpf) === normalize(cpf))
+        return this.inMemoryDb.find(account => normalize(account.cpf) === normalize(cpf))
     }
 
     async create(account: Account): Promise<Account> {
-        this._inMemoryDb.push(account)
+        this.inMemoryDb.push(account)
         return account
     }
 }
