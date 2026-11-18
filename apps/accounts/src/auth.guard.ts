@@ -11,9 +11,10 @@ const TOKEN_REPOSITORY = TokenRepository.TOKEN_REPOSITORY
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  private _jwtService: JwtService =  new JwtService()
-  
-  constructor(@Inject(TOKEN_REPOSITORY) private readonly _tokenRepository: TokenRepository) {}
+  constructor(
+    @Inject(TOKEN_REPOSITORY) private readonly tokenRepository: TokenRepository,
+    private readonly jwtService: JwtService
+  ) {}
 
   canActivate(context: ExecutionContext): boolean {
     const request = context.switchToHttp().getRequest<AuthenticatedRequest>()
@@ -21,10 +22,10 @@ export class AuthGuard implements CanActivate {
 
     if (scheme !== 'Bearer') throw new UnauthorizedException('Token ausente')
 
-    const payload = this._jwtService.verify(token)
-    const revoked = this._tokenRepository.isRevoked(payload.jti)
+    const payload = this.jwtService.verify(token)
+    const revoked = this.tokenRepository.isRevoked(payload.jti)
     if (revoked) throw new UnauthorizedException('Token revogado')
-    
+
     request.user = payload
     return true
   }

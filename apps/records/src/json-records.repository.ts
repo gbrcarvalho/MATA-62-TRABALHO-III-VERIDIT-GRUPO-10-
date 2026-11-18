@@ -3,8 +3,7 @@ import { RecordsRepository } from './interfaces/records-repository.interface.js'
 import { EvidenceRecord } from './interfaces/evidence-record.interface.js'
 import { PaginatedResult } from './paginated-result.js'
 import { ListRecordsQuery } from './list-records.query.js'
-
-const FILE_PATH = './records.json'
+import { Injectable, OnModuleInit } from '@nestjs/common'
 
 export function paginate<T>(items: T[], page: number, pageSize: number) {
     const total = items.length
@@ -22,10 +21,19 @@ export function paginate<T>(items: T[], page: number, pageSize: number) {
     }
 }
 
-export class JsonRecordsRepository implements RecordsRepository {
+@Injectable()
+export class JsonRecordsRepository implements RecordsRepository, OnModuleInit {
+    private _inMemoryDb: EvidenceRecord[]
+    private _filePath: string
+
+    async onModuleInit(): Promise<void> {
+        this._filePath = './database/seed.json'
+        this._inMemoryDb = await this._readEvidenceRecords()
+    }
+
     private async _readEvidenceRecords(): Promise<EvidenceRecord[]> {
         try {
-            const content = await readFile(FILE_PATH, 'utf-8')
+            const content = await readFile(this._filePath, 'utf-8')
             return JSON.parse(content)
         } catch (err: any) {
             if (err.code === 'ENOENT') return [] // arquivo ainda não existe
@@ -35,16 +43,13 @@ export class JsonRecordsRepository implements RecordsRepository {
 
     async findByUser(userId: string, query: ListRecordsQuery): Promise<PaginatedResult<EvidenceRecord>> {
         const { page, pageSize, status } = query
-        const records = await this._readEvidenceRecords()
+        const records = this._inMemoryDb//await this._readEvidenceRecords()
         const recordPage = paginate(records, page, pageSize).items
 
         let filteredRecordPage: EvidenceRecord[]
         if (status) {
-            console.log('com status: ', status)
             filteredRecordPage = recordPage.filter(rec => rec.userId === userId && rec.status === status)
-            console.log(filteredRecordPage)
         } else {
-            console.log('sem status: ', status)
             filteredRecordPage = recordPage.filter(rec => rec.userId === userId)
         }
 
@@ -52,7 +57,7 @@ export class JsonRecordsRepository implements RecordsRepository {
     }
 
     async findByIdAndUser(recordId: string, userId: string): Promise<EvidenceRecord | undefined> {
-        const records = await this._readEvidenceRecords()
+        const records = this._inMemoryDb//await this._readEvidenceRecords()
         const filteredRecords = records.filter(rec => rec.userId === userId)
         return filteredRecords.find(rec => rec.recordId === recordId)
     }

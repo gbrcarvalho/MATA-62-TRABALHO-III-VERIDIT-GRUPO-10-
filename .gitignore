@@ -104,6 +104,7 @@ docker-compose.local.yml
 !.vscode/settings.json
 !.vscode/launch.json
 !.vscode/tasks.json
+.vscode/
 
 # Outras IDEs
 .idea/

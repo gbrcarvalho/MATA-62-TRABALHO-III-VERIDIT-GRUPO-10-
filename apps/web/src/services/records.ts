@@ -1,18 +1,29 @@
 // apps/web/src/services/records.ts
 import type { Record } from '@/types/record';
 
-const RECORDS_API_URL = process.env.NEXT_PUBLIC_RECORDS_API_URL ?? 'http://localhost:3002';
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3009';
+const TOKEN_KEY = 'token';
 
 // Array em memória para guardar as capturas simuladas na sessão atual
 let MOCK_RECORDS: Record[] = [];
 
-export async function fetchRecords(userId: string): Promise<Record[]> {
+// era userId, mudei porque agora o frontend se comunica somente com o api gateway
+export async function fetchRecords(): Promise<Record[]> {
   try {
-    // Tenta buscar do backend real primeiro
-    const params = new URLSearchParams({ page: '1', pageSize: '10' });
-    const res = await fetch(`${RECORDS_API_URL}/records?${params.toString()}`, {
+  // Tenta buscar do backend real primeiro
+    const params = new URLSearchParams({
+      page: '1',
+      pageSize: '10'
+    });
+
+    const token = localStorage.getItem(TOKEN_KEY) ?? '';
+
+    const res = await fetch(`${API_URL}/records?${params.toString()}`, {
       method: 'GET',
-      headers: { 'x-user-id': userId },
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
     });
 
     if (res.ok) {
@@ -33,7 +44,7 @@ export async function fetchRecords(userId: string): Promise<Record[]> {
   return MOCK_RECORDS;
 }
 
-// 👇 Nova função para simular a chegada da captura externa
+// Nova função para simular a chegada da captura externa
 export async function simulateCapture(): Promise<void> {
   return new Promise((resolve) => {
     setTimeout(() => {

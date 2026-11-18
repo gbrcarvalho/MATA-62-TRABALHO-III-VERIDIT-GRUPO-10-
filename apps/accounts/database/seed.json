@@ -1,0 +1,21 @@
+[
+  {
+    "id": "25e74d09-a55e-4ac1-b12d-3e55ef92b034",
+    "name": "João Silva",
+    "email": "joao@example.com",
+    "passwordHash": "000000",
+    "cpf": "000.000.000-00",
+    "type": 0,
+    "createdAt": "2026-11-09T20:30:33.447Z"
+  },
+  {
+    "id": "27b7ad1a-cd36-4599-87a5-968e1e9ff4db",
+    "name": "Maria Souza",
+    "email": "maria@example.com",
+    "passwordHash": "000001",
+    "cpf": "000.000.000-01",
+    "oab": "OAB/XX 000.000",
+    "type": 1,
+    "createdAt": "2026-11-12T01:41:50.413Z"
+  }
+]

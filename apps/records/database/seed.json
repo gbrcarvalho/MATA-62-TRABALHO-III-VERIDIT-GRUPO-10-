@@ -1,0 +1,24 @@
+[
+  {
+      "recordId": "record-0000",
+      "userId": "25e74d09-a55e-4ac1-b12d-3e55ef92b034",
+      "title": "Registro-0000",
+      "startedAt": "20h21 10/11/2026",
+      "finishedAt": "",
+      "status": 0,
+      "dataType": ["IMAGE", "IMAGE", "VIDEO"],
+      "nOfImages": 2,
+      "nOfVideos": 1
+  },
+  {
+      "recordId": "record-0001",
+      "userId": "25e74d09-a55e-4ac1-b12d-3e55ef92b034",
+      "title": "Registro-0001",
+      "startedAt": "10h22 11/11/2026",
+      "finishedAt": "10h23 11/11/2026",
+      "status": 1,
+      "dataType": ["IMAGE"],
+      "nOfImages": 1,
+      "nOfVideos": 0
+  }
+]

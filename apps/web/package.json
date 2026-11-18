@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "start:dev": "next dev",
+    "build": "next build"
   },
   "dependencies": {
+    "@next/env": "^16.4.6",
     "next": "16.4.5",
     "react": "19.3.0",
     "react-dom": "19.3.0"

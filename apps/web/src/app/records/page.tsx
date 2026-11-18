@@ -4,7 +4,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
-import { fetchRecords, simulateCapture } from '@/services/records'; // 👈 Importação atualizada
+import { fetchRecords, simulateCapture } from '@/services/records'; // Importação atualizada
 import type { Record } from '@/types/record';
 
 export default function RecordsPage() {
@@ -41,7 +41,7 @@ export default function RecordsPage() {
     loadRecords();
   }, [loadRecords]);
 
-  // 👇 Função do Botão Simulador Atualizada
+  // Função do Botão Simulador Atualizada
   async function handleSimulateCapture() {
     setIsSimulating(true);
     setToastMessage('Processando nova captura...');
@@ -67,8 +67,7 @@ export default function RecordsPage() {
   return (
     <div className="min-h-screen bg-slate-50 p-8 relative">
       <div className="max-w-4xl mx-auto space-y-8">
-        
-        {/* Cabeçalho */}
+
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-bold text-slate-800">Meus Registros</h1>
@@ -138,7 +137,7 @@ export default function RecordsPage() {
         )}
       </div>
 
-      {/* 🔴 MODAL DE DETALHES DO REGISTRO */}
+      {/* MODAL DE DETALHES DO REGISTRO */}
       {selectedRecord && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
           <div className="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in duration-200">

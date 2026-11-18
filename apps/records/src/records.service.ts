@@ -1,14 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { PaginatedResult } from './paginated-result.js';
 import { RecordListItemDto } from './dtos/record-list-item.dto.js';
 import { RecordDetailDto } from './dtos/record-detail.dto.js';
-import { RecordsRepository } from './interfaces/records-repository.interface.js';
+import * as RecordsRepository from './interfaces/records-repository.interface.js';
 import { ListRecordsQuery } from './list-records.query.js';
-import { JsonRecordsRepository } from './json-records.repository.js';
+
+const RECORDS_REPOSITORY = RecordsRepository.RECORDS_REPOSITORY
+type RecordsRepository = RecordsRepository.RecordsRepository
 
 @Injectable()
 export class RecordsService {
-  private _recordsRepository: RecordsRepository = new JsonRecordsRepository()
+  constructor(@Inject(RECORDS_REPOSITORY) private _recordsRepository: RecordsRepository) {}
 
   async list(userId: string, query: ListRecordsQuery): Promise<PaginatedResult<RecordListItemDto>> {
     const { page, pageSize } = query
