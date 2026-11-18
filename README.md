@@ -11,8 +11,8 @@ Como nossa equipe é iniciante em desenvolvimento de sistemas, e alguns de nós 
 | REQ-01 | Cadastrar usuário | [fluxo-req-01](docs/diagrams/fluxo-req-01.md) | [sequencia-req-01](docs/diagrams/sequencia-req-01.md) |
 | REQ-03 | Logar no sistema | [fluxo-req-03](docs/diagrams/fluxo-req-03.md) | [sequencia-req-03](docs/diagrams/sequencia-req-03.md) |
 | REQ-04 | Sair do sistema | [fluxo-req-04](docs/diagrams/fluxo-req-04.md) | [sequencia-req-04](docs/diagrams/sequencia-req-04.md) |
-| REQ-12 | Confirmar captura de tela por e-mail | [fluxo-req-12](docs/diagrams/fluxo-req-12.md) | [sequencia-req-12](docs/diagrams/sequencia-req-12.md) |
-| REQ-13 | Listar registros realizados | [fluxo-req-13](docs/diagrams/fluxo-req-13.md) | [sequencia-req-13](docs/diagrams/sequencia-req-13.md) |
+| REQ-12 | Listar registros realizados | [fluxo-req-12](docs/diagrams/fluxo-req-12.md) | [sequencia-req-12](docs/diagrams/sequencia-req-12.md) |
+| REQ-13 | Visualizar detalhes dos registros realizados | [fluxo-req-13](docs/diagrams/fluxo-req-13.md) | [sequencia-req-13](docs/diagrams/sequencia-req-13.md) |
 
 ## Arquitetura
 
