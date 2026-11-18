@@ -22,7 +22,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  // Ao montar, recupera do localStorage (não há GET /me no back)
+
   useEffect(() => {
     const storedUser = localStorage.getItem(USER_KEY);
     if (storedUser) {
@@ -52,7 +52,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       await api('/auth/logout', { method: 'POST' });
     } catch {
-      // se falhar (token expirado etc.), segue com limpeza local
     } finally {
       localStorage.removeItem(TOKEN_KEY);
       localStorage.removeItem(USER_KEY);

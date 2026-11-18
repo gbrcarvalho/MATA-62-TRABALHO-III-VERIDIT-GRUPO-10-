@@ -2,10 +2,12 @@
 
 export interface Record {
   id: string;
-  title: string;       // 🔧 ajuste conforme o backend
-  description: string; // 🔧 ajuste conforme o backend
-  status: string;      // 🔧 ajuste conforme o backend
-  createdAt: string;   // 🔧 ajuste conforme o backend
+  title: string;
+  description: string;
+  status: string;
+  createdAt: string;
+  clientName?: string;
+  caseNumber?: string;
 }
 
 export interface CreateRecordRequest {
