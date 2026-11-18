@@ -1,3 +1,32 @@
 [
-  
+  {
+    "id": "96a29001-e19f-4c90-9cb5-e95cf125fc6f",
+    "name": "larissa",
+    "email": "lariconrado@gmail.com",
+    "passwordHash": "123456",
+    "cpf": "12345678910",
+    "oab": null,
+    "type": 0,
+    "createdAt": "2026-11-17T16:49:30.317Z"
+  },
+  {
+    "id": "e6194cb1-c700-4375-880a-c2cc0985b3d2",
+    "name": "teste",
+    "email": "teste@gmail.com",
+    "passwordHash": "123456+",
+    "cpf": "12345678911",
+    "oab": null,
+    "type": 0,
+    "createdAt": "2026-11-17T18:52:50.888Z"
+  },
+  {
+    "id": "93e31ca5-c80c-4575-a699-d9ff6e007215",
+    "name": "teste1",
+    "email": "teste1@gmail.com",
+    "passwordHash": "123456",
+    "cpf": "12345678912",
+    "oab": null,
+    "type": 0,
+    "createdAt": "2026-11-17T18:54:11.622Z"
+  }
 ]
