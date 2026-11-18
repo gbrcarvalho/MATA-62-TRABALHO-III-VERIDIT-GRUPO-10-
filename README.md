@@ -2,7 +2,7 @@
 
 Esta é a implementação do sistema Veridit a partir das decisões arquiteturais do grupo 1, conforme registrado na documentação em `/docs/adrs`. Dos 16 requisitos, foram implementados 5 (REQ-01, REQ-03, REQ-04, REQ-12 e REQ-13), conforme os diagramas em `/docs/diagrams`.
 
-Como nossa equipe é iniciante em desenvolvimento de sistemas, e alguns de nós não tínhamos experiência com toda a stack usada no projeto, optamos por focar na lógica de negócio, separando-a da infraestrutura real, que foi substituída por mocks extremamente básicos.
+Por se tratar de uma equipe iniciante, cujos integrantes não dominavam toda a stack utilizada, optou-se por concentrar o desenvolvimento na lógica de negócio, isolando-a da infraestrutura e das características arquiteturais (como persistência e segurança). Por esse motivo, algumas dependências externas foram substituídas por mocks. Essa separação, além de facilitar os testes e a manutenção, permite que a infraestrutura real seja integrada futuramente sem alterações na lógica de negócio.
 
 ## Requisitos implementados
 
@@ -16,7 +16,7 @@ Como nossa equipe é iniciante em desenvolvimento de sistemas, e alguns de nós 
 
 ## Arquitetura
 
-Seguimos a arquitetura (Service-Based Architecture) definida pelo [grupo 1](https://github.com/LucasC-Soares/Veridit/tree/main).
+Seguimos o estilo arquitetural (Service-Based Architecture) definida pelo [grupo 1](https://github.com/LucasC-Soares/Veridit/tree/main).
 
 | Serviço | Pasta | Requisitos atendidos | Diagrama UML |
 |---|---|---|---|
@@ -53,13 +53,16 @@ Você também pode criar sua própria conta, mas lembre-se de que ela será perd
 
 ## Implementação
 
-Decisões arquiteturais do grupo 1 respeitadas nesta implementação (detalhes em `/docs/adrs`):
+Status das implementações em relação às decisões arquiteturais (detalhes em `/docs/adrs`):
 
-- **Autenticação centralizada no gateway com tokens:** o login (REQ-03) e o logout (REQ-04) passam pelo API Gateway, que valida o token antes de encaminhar as requisições aos demais serviços.
-- **Invalidação do token no logout:** ao sair do sistema (REQ-04), o token deixa de ser aceito.
-- **Implantação independente por serviço:** cada serviço é uma aplicação separada em `apps/`.
-- **Banco compartilhado com esquema por domínio:** os esquemas ficam em `database/migrations`, substituídos por mocks nesta entrega.
-
+| ADR | Título | Status |
+|---|---|---|
+| ADR-0001 | SEGURANÇA | Dívida técnica |
+| ADR-0003 | DISPONIBILIDADE | Seguido |
+| ADR-0005 | ESTILO ARQUITETURAL BASEADO EM SERVIÇOS | Seguido |
+| ADR-0006 | DB COMPARTILHADO COM ESQUEMA POR DOMÍNIO | Dívida Técnica |
+| ADR-0007 | AUTENTICAÇÃO CENTRALIZADA NO GATEWAY COM TOKENS | Desvio e Dívida Técnica |
+ 
 ---
 
 ## Componentes candidatos e implementação
