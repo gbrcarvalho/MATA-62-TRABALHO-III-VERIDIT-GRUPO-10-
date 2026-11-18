@@ -12,10 +12,10 @@ export default function RecordsPage() {
   const [records, setRecords] = useState<Record[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  
+
   // Estado para o Modal
   const [selectedRecord, setSelectedRecord] = useState<Record | null>(null);
-  
+
   // Estados para o Simulador de Captura
   const [isSimulating, setIsSimulating] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
@@ -25,9 +25,9 @@ export default function RecordsPage() {
     if (!user) return;
     setLoading(true);
     setError('');
-    
+
     try {
-      const data = await fetchRecords(user.id);
+      const data = await fetchRecords();
       setRecords(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erro de conexão com o servidor.');
@@ -45,7 +45,7 @@ export default function RecordsPage() {
   async function handleSimulateCapture() {
     setIsSimulating(true);
     setToastMessage('Processando nova captura...');
-    
+
     try {
       await simulateCapture(); // Simula o serviço externo criando o dado
       await loadRecords();     // Recarrega a lista com o novo dado
@@ -61,7 +61,7 @@ export default function RecordsPage() {
   if (authLoading || (loading && records.length === 0 && !error)) {
     return <p className="text-center mt-10">Carregando registros...</p>;
   }
-  
+
   if (!user) return null;
 
   return (
@@ -74,7 +74,7 @@ export default function RecordsPage() {
             <p className="text-slate-500 mt-1">Gerencie as capturas de tela do sistema Veridit</p>
           </div>
           <div className="flex gap-4">
-            <button 
+            <button
               onClick={handleSimulateCapture}
               disabled={isSimulating || loading}
               className="bg-emerald-600 text-white px-4 py-2 rounded-md font-medium hover:bg-emerald-700 transition-colors disabled:opacity-50 flex items-center gap-2"
@@ -91,7 +91,7 @@ export default function RecordsPage() {
         {error && (
           <div className="p-6 bg-red-50 border border-red-200 rounded-xl text-center">
             <p className="text-red-700 font-medium mb-4">{error}</p>
-            <button 
+            <button
               onClick={loadRecords}
               className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors font-medium text-sm"
             >
@@ -111,8 +111,8 @@ export default function RecordsPage() {
               </div>
             ) : (
               records.map(record => (
-                <div 
-                  key={record.id} 
+                <div
+                  key={record.id}
                   onClick={() => setSelectedRecord(record)}
                   className="p-6 hover:bg-slate-50 transition-colors cursor-pointer"
                 >
